@@ -1,0 +1,121 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  padding-left: 10px;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  transition-duration: var(--transition-duration);
+
+  &:hover {
+    background-color: var(--color-gray-1);
+  }
+
+  &.is-disappearing {
+    opacity: 0;
+    translate: 0 -75%;
+    transition-duration: calc(var(--transition-duration) * 2);
+    pointer-events: none;
+
+    & ~ .todo-item {
+      translate: 0 calc((100% + var(--todoListRowGap)) * -1);
+      transition-delay: var(--transition-duration);
+      transition-duration: var(--transition-duration);
+      pointer-events: none;
+    }
+  }
+}
+
+.todo-item__checkbox {
+  flex: 20px 0 0;
+  aspect-ratio: 1;
+  accent-color: var(--color-black);
+  appearance: none;
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--color-gray-4);
+  border-radius: 4px;
+
+  &:not(:checked) {
+    &::after {
+      opacity: 0;
+    }
+  }
+
+  &:checked {
+    background-color: var(--color-dark-2);
+    border-color: var(--color-dark-2);
+
+    & + .todo-item__label {
+      color: var(--color-gray-4);
+      text-decoration: line-through;
+    }
+  }
+
+  &::after {
+    content: "\2713";
+    position: absolute;
+    color: var(--color-white);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+}
+
+.todo-item__label {
+  width: 100%;
+  pointer-events: none;
+}
+
+.todo-item__delete_button {
+  flex: 44px 0 0;
+  aspect-ratio: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: inherit;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    display: block;
+    background-color: var(--color-gray-4);
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+  }
+
+  &::before {
+    rotate: 45deg;
+  }
+
+  &::after {
+    rotate: -45deg;
+  }
+
+  &:hover {
+    background-color: var(--color-dark-1);
+
+    &::after,
+    &::before {
+      background-color: var(--color-white);
+    }
+  }
+
+  &:active {
+    scale: 1.05;
+  }
+
+  * {
+    pointer-events: none;
+  }
+}

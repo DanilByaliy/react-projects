@@ -1,0 +1,21 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  height: var(--input-height);
+  padding: 12px;
+  color: var(--color-gray-1);
+  background-color: var(--color-dark-2);
+  border: var(--border);
+  border-radius: var(--border-radius);
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--color-dark-2);
+      background-color: transparent;
+    }
+  }
+
+  &:active {
+    scale: 1.05;
+  }
+}
